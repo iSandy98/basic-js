@@ -13,10 +13,42 @@ const { NotImplementedError } = require('../extensions/index.js');
  * createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) => 'LOO'
  *
  */
-function createDreamTeam(/* members */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ function replaceSpace(member){
+  let space = / /gi
+  return member.replace(space, '')
 }
+
+function isLetter(member){
+  return member.match(/[a-z]/i)
+}
+
+function createDreamTeam(members){
+  let letter = []
+  try{
+      for(let i=0; i<members.length; i++){
+          if(typeof members[i] == 'string'){
+              let member = replaceSpace(members[i])
+              if(isLetter(member[0])){
+                  letter.push(member[0].toUpperCase())
+              }
+          }
+      }
+  }catch{
+      return false
+  }
+  letter.sort()
+  let word = ''
+  for(let i=0; i<letter.length; i++){
+      word = word + letter[i]
+  }
+  if(word.length != 0){
+      return word
+  }else{
+      return false
+  }
+  
+}
+console.log(createDreamTeam(['Catherine', 'Walter', 'Rachel', 'Brandon', 'Lori', 'Kimberly', 'Keith', 'Brandon', 'Johnny', 'Anna']))
 
 module.exports = {
   createDreamTeam
